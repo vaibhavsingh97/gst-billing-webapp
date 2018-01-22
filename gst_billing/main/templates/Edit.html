@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+    <main role="main" class="container">
+        <h1 class="mt-5">Edit Item</h1>
+        {% if messages %}
+            <div class="alert alert-success" role="alert">
+                {% for message in messages %}
+                    <h4>{{ message }}</h4>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form action="/update/{{ item.id }}/" method="post">
+            {% csrf_token %}
+            <p><label for="id_id">Id:</label> <input type="number" name="id" required id="id_id" value="{{ item.id }}"/>
+            </p>
+            <p><label for="id_name">Name:</label> <input type="text" name="name" maxlength="10" required id="id_name"
+                                                         value="{{ item.name }}"/></p>
+            <p><label for="id_quantity">Quantity:</label> <input type="number" name="quantity" required id="id_quantity"
+                                                                 value="{{ item.quantity }}"/>
+            </p>
+            <p><label for="id_price_per_unit">Price per unit:</label> <input type="number" name="price_per_unit"
+                                                                             required
+                                                                             id="id_price_per_unit"
+                                                                             value="{{ item.price_per_unit }}"/></p>
+            <p><label for="id_gst">Gst:</label> <select name="gst" id="id_gst">
+                <option value="5" selected>5%</option>
+
+                <option value="12">12%</option>
+
+                <option value="18">18%</option>
+
+                <option value="28">28%</option>
+
+            </select></p>
+            <br>
+            <input type="submit" value="update" class="btn btn-primary" style="width: 100%;height: 50px;"/>
+        </form>
+    </main>
+{% endblock %}
