@@ -51,3 +51,8 @@ def update(request, id):
     item.gst = request.POST['gst']
     item.save()
     return HttpResponseRedirect('/updateItem/')
+
+def create_bill(request):
+    item = AddNewItemModel.objects.all()
+    context = {'items': item}
+    return render(request, 'CreateBilll.html', context)

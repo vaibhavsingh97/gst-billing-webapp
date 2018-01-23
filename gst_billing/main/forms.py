@@ -24,3 +24,16 @@ class AddNewItemForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Price can't be zero"
             )
+#
+# class CreateNewBill(forms.ModelForm):
+#     class Meta:
+#         model = CreateBill
+#         fields = ('id', 'item_name')
+#
+#     def clean(self):
+#         clean_data = super().clean()
+#         name  = clean_data.get("id")
+#         if name != AddNewItemModel.objects.get(name):
+#             raise forms.ValidationError(
+#                 "Item not exist"
+#             )

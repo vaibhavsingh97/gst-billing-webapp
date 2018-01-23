@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block body %}
+    <main role="main" class="container">
+        <h1 class="mt-5">Create Bill</h1>
+        <br>
+        <h4> Bill ID: <span class="badge badge-secondary">29828882</span></h4>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">quantity</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Tax</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Buttons</th>
+            </tr>
+            </thead>
+            <tbody id="table1">
+            {#            {% for item in items %}#}
+            <tr id="div1">
+                <th scope="row">
+                    {#                                            Item Name: {{ item.name }}<br>#}
+                    {#                                            Quantity: {{ item.quantity }}<br>#}
+                    {#                                            Price : {{ item.price_per_unit }}<br>#}
+                    {#                                            GST: {{ item.gst }}#}
+                    <input id="item_name1" type="text" class="form-control">
+                </th>
+                <td>
+                    <input id="quantity1" type="number" class="form-control">
+                </td>
+                <td>
+                    <input id="amount1" type="number" class="form-control">
+                </td>
+                <td>
+                    <input id="tax1" type="number" class="form-control">
+                </td>
+                <td>
+                    <input id="total_amount1" type="number" class="form-control">
+                </td>
+                <td>
+                    <a href="#!">
+                        <button type="button" class="btn btn-outline-primary">Update</button>
+                    </a>
+                    {#                        <a href="#!">#}
+                    {#                            <button type="button" class="btn btn-outline-primary">calculate</button>#}
+                    {#                        </a>#}
+                </td>
+
+            </tr>
+            {#            {% endfor %}#}
+            </tbody>
+        </table>
+        <button id="addButton" type="button" class="btn btn-outline-primary">Add Field</button>
+        <button id="removeButton" type="button" class="btn btn-outline-primary">Remove Field</button>
+    </main>
+{% endblock %}
+{% block js_script %}
+    <script type="text/javascript">
+        var counter = 2;
+        $("#addButton").click(function () {
+            console.log("counter: " + counter);
+            if (counter > 10) {
+                alert("Only 10 divisions allowed");
+                return false;
+            }
+
+            var newTextDiv = $(document.createElement('tr')).attr("id", 'div' + counter);
+            newTextDiv.after().html(
+                '<th scope="row">' + '<input type="text" class="form-control" name="textbox' + counter + '" id="item_name' + counter + '" value="" >' + '</th>'
+                +
+                '<td>' + '<input type="number" class="form-control" name="textbox' + counter + '" id="quantity' + counter + '" value="" >' + '</td>'
+                +
+                '<td>' + '<input type="number" class="form-control" name="textbox' + counter + '" id="amount' + counter + '" value="" >' + '</td>'
+                +
+                '<td>' + '<input type="number" class="form-control" name="textbox' + counter + '" id="tax' + counter + '" value="" >' + '</td>'
+                +
+                '<td>' + '<input type="number" class="form-control" name="textbox' + counter + '" id="total_amount' + counter + '" value="" >' + '</td>'
+                +
+                '<td>' + '<a href="#!"><button type="button" class="btn btn-outline-primary">Update</button> '
+            );
+            newTextDiv.appendTo('#table1');
+            counter++
+        });
+
+        $('#removeButton').click(function () {
+            console.log("counter: " + counter);
+            if (counter == 1) {
+                alert('No more fields left');
+                return false;
+            }
+            counter--;
+            $('#table' + counter).remove();
+        });
+    </script>
+{% endblock %}
